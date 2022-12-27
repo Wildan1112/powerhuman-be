@@ -20,6 +20,7 @@ class CompanyController extends Controller
         $name = $request->input('name');
         $limit = $request->input('limit', 10);
 
+        // Get Multiple Data
         $companyQuery = Company::with(['users'])->whereHas('users', function($query) {
             $query->where('user_id', Auth::id());
         });
@@ -94,7 +95,7 @@ class CompanyController extends Controller
             // Update Company
             $company->update([
                 'name' => $request->name,
-                'logo' => $path
+                'logo' => isset($path) ? $path : $company->logo
             ]);
 
             return ResponseFormatter::success($company, 'Company updated');
