@@ -54,7 +54,6 @@ class ResponsibilityController extends Controller
 
         if ($name)
         {
-            // powerhuman.com/api/responsibility?name=...
             $responsibilities->where('name', 'like', '%' . $name . '%');
         }
         return ResponseFormatter::success(
@@ -63,26 +62,26 @@ class ResponsibilityController extends Controller
         );
     }
 
-    // public function destroy($id)
-    // {
-    //     try {
-    //         // Get responsibility
-    //         $responsibility = Responsibility::find($id);
+    public function destroy($id)
+    {
+        try {
+            // Get responsibility
+            $responsibility = Responsibility::find($id);
 
-    //         // TODO: check if responsibility owned by user
-    //         // check if responsibility exist
-    //         if(!$responsibility){
-    //             throw new Exception('Responsibility not found');
-    //         }
-    //         // Delete responsibility
-    //         $responsibility->delete();
+            // TODO: check if responsibility owned by user
+            // check if responsibility exist
+            if(!$responsibility){
+                throw new Exception('Responsibility not found');
+            }
+            // Delete responsibility
+            $responsibility->delete();
 
-    //         return ResponseFormatter::success('Responsibility deleted');
+            return ResponseFormatter::success('Responsibility deleted');
 
 
-    //     } catch (Exception $e) {
-    //         return ResponseFormatter::error($e->getMessage(), 500);
-    //     }
+        } catch (Exception $e) {
+            return ResponseFormatter::error($e->getMessage(), 500);
+        }
 
-    // }
+    }
 }
