@@ -84,7 +84,7 @@ class RoleController extends Controller
         }
         if ($with_responsibilities)
         {
-            $roles->where('responsibilities');
+            $roles->with('responsibilities');
         }
         return ResponseFormatter::success(
             $roles->paginate($limit),

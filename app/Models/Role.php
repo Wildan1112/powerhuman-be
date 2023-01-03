@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Responsibility;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Role extends Model
 {
@@ -23,7 +24,7 @@ class Role extends Model
     // relasi role->responsibility
     public function responsibilities()
     {
-       return $this->hasMany(Responsibilty::class);
+       return $this->hasMany(Responsibility::class);
     }
 
     // relasi role->employee

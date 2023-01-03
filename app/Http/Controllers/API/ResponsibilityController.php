@@ -11,25 +11,6 @@ use App\Http\Requests\CreateResponsibilityRequest;
 
 class ResponsibilityController extends Controller
 {
-    public function create(CreateResponsibilityRequest $request)
-    {
-        try {
-            $responsibility = Responsibility::create([
-                'name' => $request->name,
-                'role_id' => $request->role_id
-            ]);
-
-            if(!$responsibility) {
-                throw new Exception("Responsibility not created");
-            }
-
-            return ResponseFormatter::success($responsibility, 'Responsibility created');
-        } catch (Exception $error ) {
-            return ResponseFormatter::error ($error->getMessage(), 500);
-        }
-    }
-
-
     public function fetch(Request $request)
     {
         $id = $request->input('id');
@@ -60,6 +41,24 @@ class ResponsibilityController extends Controller
             $responsibilities->paginate($limit),
             'Responsibilities Data Found'
         );
+    }
+
+    public function create(CreateResponsibilityRequest $request)
+    {
+        try {
+            $responsibility = Responsibility::create([
+                'name' => $request->name,
+                'role_id' => $request->role_id
+            ]);
+
+            if(!$responsibility) {
+                throw new Exception("Responsibility not created");
+            }
+
+            return ResponseFormatter::success($responsibility, 'Responsibility created');
+        } catch (Exception $error ) {
+            return ResponseFormatter::error ($error->getMessage(), 500);
+        }
     }
 
     public function destroy($id)
