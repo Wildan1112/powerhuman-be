@@ -71,8 +71,7 @@ class TeamController extends Controller
         $name = $request->input('name');
         $limit = $request->input('limit', 10);
 
-        // Get Multiple Data
-        $teamQuery = Team::where('company_id', $request->company_id);
+        $teamQuery = Team::withCount('employees');
 
         // Get single data
         if($id)
@@ -86,7 +85,7 @@ class TeamController extends Controller
             return ResponseFormatter::error('Team Not Found', 404);
         }
         // Get multiple data
-        $teams = $teamQuery;
+        $teams = $teamQuery->where('company_id', $request->company_id);
 
         if ($name)
         {
