@@ -61,7 +61,7 @@ class RoleController extends Controller
         $with_responsibilities = $request->input('with_responsibilities', false);
 
         // Get Multiple Data
-        $roleQuery = Role::query();
+        $roleQuery = Role::withCount('responsibilities');
 
         // Get single data
         if($id)
